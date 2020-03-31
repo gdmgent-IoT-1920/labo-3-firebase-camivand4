@@ -1,4 +1,3 @@
-# import libraries
 from flask import Flask, render_template, request
 from sense_hat import SenseHat
 
@@ -13,7 +12,7 @@ app = Flask(__name__)
 sense_values = {
     'value': '#000000',
     'type': 'hex',
-    'message': 'hey'
+    'message': ''
 }
 
 # function: on_snapshot(doc_snapshot, changes, read_time)
@@ -35,14 +34,14 @@ def messageOnMatrix():
 
 @app.route('/')
 def index():
-    return 'Hello World'
+    return '<a href="http://192.168.0.163:8080/hello">Click here for hello</a><br><a href="http://192.168.0.163:8080/colorpicker">Click here for the colorpicker</a>'
 
 @app.route('/hello')
 def hello():
-    return 'You have reached the Pi of F-Rogers'
+    return 'You have reached the Pi of Camille'
 
-@app.route('/sensehat', methods=['GET', 'POST'])
-def sensehat():
+@app.route('/colorpicker', methods=['GET', 'POST'])
+def colorpicker():
     if(request.method == 'POST'):
         sense_values['value'] = request.form['senseColor']
         sense_values['message'] = request.form['message']
@@ -53,10 +52,9 @@ def sensehat():
 
     return render_template('sensehat.html.j2', sense_values = sense_values)
 
-
-
 # server constants
 host = '192.168.0.163'
 port = 8080
+
 if __name__ == '__main__':
     app.run(host=host, port=port, debug=True)

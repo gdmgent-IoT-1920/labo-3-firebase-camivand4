@@ -16,7 +16,7 @@
 {% if sense_values %}
     <h1>Change the color of the sensehat</h1>
 <div id="senseEmulator" style="background-color: {{ sense_values['value'] }};"></div>
-    <form action="sensehat" method="post">
+    <form action="colorpicker" method="post">
         <input type="color" name="senseColor" id="senseColor" value="{{ sense_values['value'] }}">
         <input type="text" name="message" value="{{sense_values['message']}}">
         <button type="submit">Update</button>
